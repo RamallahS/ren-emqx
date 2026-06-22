@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: emqx
+    env: docker
+    region: frankfurt # Closest to Bielsko-Biala, Poland
+    plan: free # Use starter or higher for persistent storage
+    dockerfile: ./Dockerfile
+    envVars:
+      - key: EMQX_DASHBOARD__LISTENER__HTTP__PORT
+        value: 10000
+    ports:
+      - port: 10000
+        protocol: tcp
+        name: dashboard
+      - port: 1883
+        protocol: tcp
+        name: mqtt
+      - port: 8083
+        protocol: tcp
+        name: ws
